@@ -23,7 +23,7 @@ public class Role {
 
     //Aseguro que no tenga valores nulos y que sea unico, es decir que no se repita ningun rol
     @Column(nullable = false, unique = true)
-    private String user_type;
+    private String userType;
 
     @OneToMany(mappedBy = "role")
     private Set<User> users;
