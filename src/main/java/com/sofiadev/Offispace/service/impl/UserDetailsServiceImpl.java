@@ -1,4 +1,4 @@
-package com.sofiadev.Offispace.service;
+package com.sofiadev.Offispace.service.impl;
 
 import com.sofiadev.Offispace.repository.UserRepository;
 import lombok.RequiredArgsConstructor;

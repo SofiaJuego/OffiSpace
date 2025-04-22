@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Builder
@@ -29,6 +30,7 @@ public class User implements UserDetails {
 
     private String lastName;
 
+    @Column(nullable = false, unique = true)
     private String email;
 
     private String password;
@@ -38,6 +40,9 @@ public class User implements UserDetails {
     @ManyToOne
     @JoinColumn(name = "role_id", nullable = false)
     private Role role;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Space> spaces;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
