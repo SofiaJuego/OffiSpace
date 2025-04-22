@@ -1,9 +1,6 @@
 package com.sofiadev.Offispace.auth;
 
 import com.sofiadev.Offispace.configuration.JwtService;
-import com.sofiadev.Offispace.dto.AuthenticationResponseDTO;
-import com.sofiadev.Offispace.dto.LoginRequestDTO;
-import com.sofiadev.Offispace.dto.RegisterRequestDTO;
 import com.sofiadev.Offispace.model.Role;
 import com.sofiadev.Offispace.model.User;
 import com.sofiadev.Offispace.repository.RoleRepository;
@@ -27,8 +24,8 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
 
 
-    public AuthenticationResponseDTO register(RegisterRequestDTO request){
-        Role role = roleRepository.findByUserType(request.getRole())
+    public AuthenticationResponse register(RegisterRequest request){
+        Role role = roleRepository.findByUserType(request.getUserType())
                 .orElseThrow(() -> new RuntimeException("Rol no encontrado"));
         User user = User.builder()
                 .name(request.getName())
@@ -43,13 +40,13 @@ public class AuthenticationService {
 
         String jwtToken = jwtService.generateToken(user.getEmail());
 
-        return AuthenticationResponseDTO.builder()
+        return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .build();
 
     }
 
-    public AuthenticationResponseDTO login(LoginRequestDTO request){
+    public AuthenticationResponse login(LoginRequest request){
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getEmail(),
@@ -62,7 +59,7 @@ public class AuthenticationService {
 
         String jwtToken = jwtService.generateToken(user.getEmail());
 
-        return AuthenticationResponseDTO.builder()
+        return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .build();
     }

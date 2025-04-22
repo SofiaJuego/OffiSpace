@@ -1,4 +1,5 @@
-package com.sofiadev.Offispace.dto;
+package com.sofiadev.Offispace.auth;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +10,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthenticationResponseDTO {
+public class LoginRequest {
 
-    private String token;
+    private String email;
+    private String password;
+
 }

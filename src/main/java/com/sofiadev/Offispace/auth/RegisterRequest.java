@@ -1,4 +1,4 @@
-package com.sofiadev.Offispace.dto;
+package com.sofiadev.Offispace.auth;
 
 
 import lombok.AllArgsConstructor;
@@ -10,12 +10,12 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class RegisterRequestDTO {
+public class RegisterRequest {
 
     private String name;
     private String lastName;
     private String email;
     private String password;
-    private String role;
+    private String userType;
 
 }
