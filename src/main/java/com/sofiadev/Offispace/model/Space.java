@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.util.Set;
 
 @Data
 @Builder
@@ -21,7 +20,7 @@ public class Space {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String title;
+    private String name;
 
     private String description;
 
@@ -37,6 +36,7 @@ public class Space {
 
     private String mainImage;
 
+    //Por el momento la idea es agregar las imagenes mediante url pero tambien podriamos cambiarlo y usar una tabla
     private String imageGallery;
 
     private Integer capacity;
@@ -45,7 +45,8 @@ public class Space {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-
-
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
 
 }
