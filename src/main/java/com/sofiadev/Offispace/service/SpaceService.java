@@ -18,7 +18,4 @@ public interface SpaceService {
     SpaceResponseDTO updateSpace(Long id,SpaceRequestDTO spaceRequestDTO);
 
     void deleteSpace(Long id) throws ResourceNotFoundException;
-
-
-
 }
