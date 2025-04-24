@@ -11,6 +11,7 @@ import com.sofiadev.Offispace.repository.UserRepository;
 import com.sofiadev.Offispace.service.SpaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.sofiadev.Offispace.exception.ResourceNotFoundException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -83,4 +84,44 @@ public class SpaceServiceImpl implements SpaceService {
         return mapToDTO(saveSpace);
 
     }
+
+    @Override
+    public SpaceResponseDTO getSpaceById(Long id) {
+        Space space = spaceRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("No se encontro la oficina con el id" + id));
+        return mapToDTO(space);
+    }
+
+    @Override
+    public SpaceResponseDTO updateSpace(Long id, SpaceRequestDTO request) {
+        Space existingSpace = spaceRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("No se encontro la oficina con el id" + id));
+
+        //Actualizo
+        existingSpace.setName(request.getName());
+        existingSpace.setDescription(request.getDescription());
+        existingSpace.setAddress(request.getAddress());
+        existingSpace.setCity(request.getCity());
+        existingSpace.setCountry(request.getCountry());
+        existingSpace.setPricePerDay(request.getPricePerDay());
+        existingSpace.setAvailable(request.getAvailable());
+        existingSpace.setMainImage(request.getMainImage());
+        existingSpace.setImageGallery(request.getImageGallery());
+        existingSpace.setCapacity(request.getCapacity());
+
+        Space update = spaceRepository.save(existingSpace);
+        return mapToDTO(update);
+    }
+
+    @Override
+    public void deleteSpace(Long id) throws ResourceNotFoundException {
+        if(spaceRepository.existsById(id)){
+            spaceRepository.deleteById(id);
+        } else {
+            throw new ResourceNotFoundException("No se encontro el turno con id: " + id);
+        }
+    }
+
+
 }
+
