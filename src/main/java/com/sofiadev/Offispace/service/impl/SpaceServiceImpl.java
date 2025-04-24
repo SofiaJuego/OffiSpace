@@ -9,7 +9,6 @@ import com.sofiadev.Offispace.repository.CategoryRepository;
 import com.sofiadev.Offispace.repository.SpaceRepository;
 import com.sofiadev.Offispace.repository.UserRepository;
 import com.sofiadev.Offispace.service.SpaceService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -52,19 +51,20 @@ public class SpaceServiceImpl implements SpaceService {
                 .mainImage(space.getMainImage())
                 .imageGallery(space.getImageGallery())
                 .capacity(space.getCapacity())
+                .categoryName(space.getCategory() != null? space.getCategory().getName() : null)
+                .userName(space.getUser() != null? space.getUser().getName() : null)
                 .build();
     }
 
     @Override
     public SpaceResponseDTO createSpace(SpaceRequestDTO request) {
-//        User user = userRepository.findById(request.getUserId())
-//                .orElseThrow(() -> new RuntimeException("No se puedo encontrar al usuario"));
-//
-//        Category category = categoryRepository.findById(request.getCategoryId())
-//                .orElseThrow(() -> new RuntimeException("No se encontro la categoria"));
+        User user = userRepository.findById(request.getUserId())
+               .orElseThrow(() -> new RuntimeException("No se pudo encontrar al usuario"));
+
+        Category category = categoryRepository.findById(request.getCategoryId())
+               .orElseThrow(() -> new RuntimeException("No se encontro la categoria"));
 
         Space space = Space.builder()
-                .name(request.getName())
                 .name(request.getName())
                 .description(request.getDescription())
                 .address(request.getAddress())
@@ -75,8 +75,8 @@ public class SpaceServiceImpl implements SpaceService {
                 .mainImage(request.getMainImage())
                 .imageGallery(request.getImageGallery())
                 .capacity(request.getCapacity())
-//                .user(user)
-//                .category(category)
+                .user(user)
+                .category(category)
                 .build();
 
         Space saveSpace = spaceRepository.save(space);

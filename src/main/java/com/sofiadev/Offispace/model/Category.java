@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -23,5 +25,9 @@ public class Category {
     private String description;
 
     private String image;
+
+    @OneToMany(mappedBy = "category")
+    private Set<Space> spaces;
+
 
 }

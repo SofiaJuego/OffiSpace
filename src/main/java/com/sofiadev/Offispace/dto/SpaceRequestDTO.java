@@ -23,6 +23,7 @@ public class SpaceRequestDTO {
     private String mainImage;
     private String imageGallery;
     private Integer capacity;
-//    private Long userId;
-//    private Long categoryId;
+
+    private Long userId;
+    private Long categoryId;
 }
