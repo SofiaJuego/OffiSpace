@@ -3,6 +3,7 @@ package com.sofiadev.Offispace.configuration;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -32,9 +33,24 @@ public class SecurityConfiguration {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
+                        //ALL
+                        .requestMatchers("/auth/**","/h2-console/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/spaces/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/reviews", "/reviews/space/**","/categories/**" ).hasAnyRole("USER", "ADMIN")
+
+                        //ADMIN
                         .requestMatchers("/auth/admin-only").hasRole("ADMIN")
-                        .requestMatchers("/auth/**","/h2-console/**", "/spaces/**", "/categories/**").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/spaces/**","/categories/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT,"/spaces/**","/categories/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE,"/spaces/**","/categories/**").hasRole("ADMIN")
+
+                        //USER
                         .requestMatchers("/user/**").hasRole("USER")
+//                        .requestMatchers(HttpMethod.GET, "/reviews/user/**").hasRole("USER")
+                        .requestMatchers(HttpMethod.POST, "/reviews/**").hasRole("USER")
+                        .requestMatchers(HttpMethod.PUT, "/reviews/**").hasRole("USER")
+                        .requestMatchers(HttpMethod.DELETE, "/reviews/**").hasRole("USER")
+
                         .anyRequest().authenticated()
                 )
                 .headers(headers -> headers.frameOptions(frame -> frame.disable()))
