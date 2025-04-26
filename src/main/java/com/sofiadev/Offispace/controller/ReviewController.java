@@ -34,7 +34,7 @@ public class ReviewController {
 
     @PostMapping
     @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<ReviewResponseDTO> createReview(@RequestBody ReviewRequestDTO reviewRequestDTO){
+    public ResponseEntity<ReviewResponseDTO> createReview(@RequestBody ReviewRequestDTO reviewRequestDTO) throws ResourceNotFoundException {
         ReviewResponseDTO createReview = reviewService.createReview(reviewRequestDTO);
         return new ResponseEntity<>(createReview, HttpStatus.CREATED);
     }

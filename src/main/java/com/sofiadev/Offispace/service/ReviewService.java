@@ -8,13 +8,13 @@ import java.util.List;
 
 public interface ReviewService {
 
-    ReviewResponseDTO createReview(ReviewRequestDTO reviewRequestDTO);
+    ReviewResponseDTO createReview(ReviewRequestDTO reviewRequestDTO) throws ResourceNotFoundException;
 
     List<ReviewResponseDTO> getAllReviews();
 
     List<ReviewResponseDTO> getReviewBySpaceById(Long spaceId);
 
-    ReviewResponseDTO getReviewById(Long id);
+    ReviewResponseDTO getReviewById(Long id) throws ResourceNotFoundException;
 
     ReviewResponseDTO updateReview(Long id, ReviewRequestDTO reviewRequestDTO, String userEmail) throws ResourceNotFoundException;
 

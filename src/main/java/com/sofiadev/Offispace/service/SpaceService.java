@@ -11,11 +11,11 @@ public interface SpaceService {
 
     List<SpaceResponseDTO> getAllSpace();
 
-    SpaceResponseDTO createSpace(SpaceRequestDTO request);
+    SpaceResponseDTO createSpace(SpaceRequestDTO request) throws ResourceNotFoundException;
 
-    SpaceResponseDTO getSpaceById(Long id);
+    SpaceResponseDTO getSpaceById(Long id) throws ResourceNotFoundException;
 
-    SpaceResponseDTO updateSpace(Long id,SpaceRequestDTO spaceRequestDTO);
+    SpaceResponseDTO updateSpace(Long id,SpaceRequestDTO spaceRequestDTO) throws ResourceNotFoundException;
 
     void deleteSpace(Long id) throws ResourceNotFoundException;
 }

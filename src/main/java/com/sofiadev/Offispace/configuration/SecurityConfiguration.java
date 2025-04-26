@@ -46,8 +46,8 @@ public class SecurityConfiguration {
 
                         //USER
                         .requestMatchers("/user/**").hasRole("USER")
-                        .requestMatchers(HttpMethod.GET, "/reviews/**", "/favorites/**").hasRole("USER")
-                        .requestMatchers(HttpMethod.POST, "/reviews/**", "/favorites/**").hasRole("USER")
+                        .requestMatchers(HttpMethod.GET, "/reviews/**", "/favorites/**", "/reservations/**").hasRole("USER")
+                        .requestMatchers(HttpMethod.POST, "/reviews/**", "/favorites/**", "/reservations/**").hasRole("USER")
                         .requestMatchers(HttpMethod.PUT, "/reviews/**").hasRole("USER")
                         .requestMatchers(HttpMethod.DELETE, "/reviews/**", "/favorites/**").hasRole("USER")
 

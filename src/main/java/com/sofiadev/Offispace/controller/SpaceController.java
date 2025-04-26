@@ -26,18 +26,18 @@ public class SpaceController {
     }
 
     @PostMapping
-    public ResponseEntity<SpaceResponseDTO> createSpace(@RequestBody SpaceRequestDTO request){
+    public ResponseEntity<SpaceResponseDTO> createSpace(@RequestBody SpaceRequestDTO request) throws ResourceNotFoundException {
         SpaceResponseDTO createSpace = spaceService.createSpace(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(createSpace);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<SpaceResponseDTO> getSpaceById(@PathVariable Long id){
+    public ResponseEntity<SpaceResponseDTO> getSpaceById(@PathVariable Long id) throws ResourceNotFoundException {
         return ResponseEntity.ok(spaceService.getSpaceById(id));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<SpaceResponseDTO> updateSpace (@PathVariable Long id, @RequestBody SpaceRequestDTO request){
+    public ResponseEntity<SpaceResponseDTO> updateSpace (@PathVariable Long id, @RequestBody SpaceRequestDTO request) throws ResourceNotFoundException {
         SpaceResponseDTO update = spaceService.updateSpace(id, request);
         return ResponseEntity.ok(update);
     }

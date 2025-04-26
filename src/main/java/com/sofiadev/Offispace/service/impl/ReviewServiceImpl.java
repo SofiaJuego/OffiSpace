@@ -2,6 +2,7 @@ package com.sofiadev.Offispace.service.impl;
 
 import com.sofiadev.Offispace.dto.ReviewRequestDTO;
 import com.sofiadev.Offispace.dto.ReviewResponseDTO;
+import com.sofiadev.Offispace.exception.AccessDeniedException;
 import com.sofiadev.Offispace.exception.ResourceNotFoundException;
 import com.sofiadev.Offispace.model.Review;
 import com.sofiadev.Offispace.model.Space;
@@ -25,12 +26,12 @@ public class ReviewServiceImpl implements ReviewService {
 
 
     @Override
-    public ReviewResponseDTO createReview(ReviewRequestDTO reviewRequestDTO) {
+    public ReviewResponseDTO createReview(ReviewRequestDTO reviewRequestDTO) throws ResourceNotFoundException {
         User user = userRepository.findById(reviewRequestDTO.getUserId())
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+                .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado"));
 
         Space space = spaceRepository.findById(reviewRequestDTO.getSpaceId())
-                .orElseThrow(() -> new RuntimeException("Oficina no encontrada"));
+                .orElseThrow(() -> new ResourceNotFoundException("Oficina no encontrada"));
 
         Review review = Review.builder()
                 .content(reviewRequestDTO.getContent())
@@ -42,8 +43,6 @@ public class ReviewServiceImpl implements ReviewService {
         Review saveReview = reviewRepository.save(review);
         return mapToDTO(saveReview);
     }
-
-
 
     @Override
     public List<ReviewResponseDTO> getAllReviews() {
@@ -62,20 +61,20 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public ReviewResponseDTO getReviewById(Long id) {
+    public ReviewResponseDTO getReviewById(Long id) throws ResourceNotFoundException {
         Review review = reviewRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Reseña no encontrada"));
+                .orElseThrow(() -> new ResourceNotFoundException("Reseña no encontrada"));
         return mapToDTO(review);
     }
 
     @Override
     public ReviewResponseDTO updateReview(Long id, ReviewRequestDTO reviewRequestDTO, String userEmail) throws ResourceNotFoundException {
         Review existingReview = reviewRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("No se encontro la reseña con el id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("No se encontro la reseña con el id: " + id));
 
         if (!existingReview.getUser().getEmail().trim()
                 .equalsIgnoreCase(userEmail.trim())){
-            throw new ResourceNotFoundException("No tienes permiso para modificar esta reseña");
+            throw new AccessDeniedException("No tienes permiso para modificar esta reseña");
         }
 
         existingReview.setContent(reviewRequestDTO.getContent());
@@ -88,10 +87,10 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public void deleteReview(Long id, String userEmail) throws ResourceNotFoundException {
         Review existingReview = reviewRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("No se encontro la reseña con el id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("No se encontro la reseña con el id: " + id));
 
         if (!existingReview.getUser().getEmail().equals(userEmail)){
-            throw new ResourceNotFoundException("No tienes permiso para eliminar esta reseña");
+            throw new AccessDeniedException("No tienes permiso para eliminar esta reseña");
         }
 
         reviewRepository.delete(existingReview);

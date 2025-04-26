@@ -58,12 +58,12 @@ public class SpaceServiceImpl implements SpaceService {
     }
 
     @Override
-    public SpaceResponseDTO createSpace(SpaceRequestDTO request) {
+    public SpaceResponseDTO createSpace(SpaceRequestDTO request) throws ResourceNotFoundException {
         User user = userRepository.findById(request.getUserId())
-               .orElseThrow(() -> new RuntimeException("No se pudo encontrar al usuario"));
+               .orElseThrow(() -> new ResourceNotFoundException("No se pudo encontrar al usuario"));
 
         Category category = categoryRepository.findById(request.getCategoryId())
-               .orElseThrow(() -> new RuntimeException("No se encontro la categoria"));
+               .orElseThrow(() -> new ResourceNotFoundException("No se encontro la categoria"));
 
         Space space = Space.builder()
                 .name(request.getName())
@@ -86,16 +86,16 @@ public class SpaceServiceImpl implements SpaceService {
     }
 
     @Override
-    public SpaceResponseDTO getSpaceById(Long id) {
+    public SpaceResponseDTO getSpaceById(Long id) throws ResourceNotFoundException {
         Space space = spaceRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("No se encontro la oficina con el id" + id));
+                .orElseThrow(() -> new ResourceNotFoundException("No se encontro la oficina con el id" + id));
         return mapToDTO(space);
     }
 
     @Override
-    public SpaceResponseDTO updateSpace(Long id, SpaceRequestDTO request) {
+    public SpaceResponseDTO updateSpace(Long id, SpaceRequestDTO request) throws ResourceNotFoundException {
         Space existingSpace = spaceRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("No se encontro la oficina con el id" + id));
+                .orElseThrow(() -> new ResourceNotFoundException("No se encontro la oficina con el id" + id));
 
         //Actualizo
         existingSpace.setName(request.getName());
