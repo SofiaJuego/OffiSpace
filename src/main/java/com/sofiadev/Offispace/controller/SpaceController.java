@@ -17,12 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SpaceController {
 
-    private SpaceService spaceService;
-
-    @Autowired
-    public SpaceController(SpaceService spaceService) {
-        this.spaceService = spaceService;
-    }
+    private final SpaceService spaceService;
 
     @GetMapping
     public ResponseEntity<List<SpaceResponseDTO>> getAllSpace(){
