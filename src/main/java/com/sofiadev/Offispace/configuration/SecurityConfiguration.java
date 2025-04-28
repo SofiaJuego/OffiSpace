@@ -35,21 +35,19 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(auth -> auth
                         //ALL
                         .requestMatchers("/auth/**","/h2-console/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/spaces/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/reviews", "/reviews/space/**","/categories/**" ).hasAnyRole("USER", "ADMIN")
-
+                        .requestMatchers(HttpMethod.GET, "/spaces/**","/reviews", "/reviews/space/**","/categories/**", "/features/**" ).permitAll()
                         //ADMIN
                         .requestMatchers("/auth/admin-only").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.POST,"/spaces/**","/categories/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.PUT,"/spaces/**","/categories/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE,"/spaces/**","/categories/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST,"/spaces/**","/categories/**", "/features/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT,"/spaces/**","/categories/**", "/features/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE,"/spaces/**","/categories/**", "/features/**").hasRole("ADMIN")
 
                         //USER
                         .requestMatchers("/user/**").hasRole("USER")
                         .requestMatchers(HttpMethod.GET, "/reviews/**", "/favorites/**", "/reservations/**").hasRole("USER")
                         .requestMatchers(HttpMethod.POST, "/reviews/**", "/favorites/**", "/reservations/**").hasRole("USER")
                         .requestMatchers(HttpMethod.PUT, "/reviews/**").hasRole("USER")
-                        .requestMatchers(HttpMethod.DELETE, "/reviews/**", "/favorites/**").hasRole("USER")
+                        .requestMatchers(HttpMethod.DELETE, "/reviews/**", "/favorites/**","/reservations/**").hasRole("USER")
 
                         .anyRequest().authenticated()
                 )

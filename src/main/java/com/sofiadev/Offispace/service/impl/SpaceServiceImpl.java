@@ -1,34 +1,35 @@
 package com.sofiadev.Offispace.service.impl;
 
+import com.sofiadev.Offispace.dto.FeatureResponseDTO;
 import com.sofiadev.Offispace.dto.SpaceRequestDTO;
 import com.sofiadev.Offispace.dto.SpaceResponseDTO;
 import com.sofiadev.Offispace.model.Category;
+import com.sofiadev.Offispace.model.Feature;
 import com.sofiadev.Offispace.model.Space;
 import com.sofiadev.Offispace.model.User;
 import com.sofiadev.Offispace.repository.CategoryRepository;
+import com.sofiadev.Offispace.repository.FeatureRepository;
 import com.sofiadev.Offispace.repository.SpaceRepository;
 import com.sofiadev.Offispace.repository.UserRepository;
 import com.sofiadev.Offispace.service.SpaceService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import com.sofiadev.Offispace.exception.ResourceNotFoundException;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class SpaceServiceImpl implements SpaceService {
 
     private final SpaceRepository spaceRepository;
     private final UserRepository userRepository;
     private final CategoryRepository categoryRepository;
+    private final FeatureRepository featureRepository;
 
-    @Autowired
-    public SpaceServiceImpl(SpaceRepository spaceRepository, UserRepository userRepository, CategoryRepository categoryRepository) {
-        this.spaceRepository = spaceRepository;
-        this.userRepository = userRepository;
-        this.categoryRepository = categoryRepository;
-    }
 
     @Override
     public List<SpaceResponseDTO> getAllSpace() {
@@ -39,24 +40,6 @@ public class SpaceServiceImpl implements SpaceService {
 
     }
 
-    private SpaceResponseDTO mapToDTO(Space space){
-        return SpaceResponseDTO.builder()
-                .id(space.getId())
-                .name(space.getName())
-                .description(space.getDescription())
-                .address(space.getAddress())
-                .city(space.getCity())
-                .country(space.getCountry())
-                .pricePerDay(space.getPricePerDay())
-                .available(space.getAvailable())
-                .mainImage(space.getMainImage())
-                .imageGallery(space.getImageGallery())
-                .capacity(space.getCapacity())
-                .categoryName(space.getCategory() != null? space.getCategory().getName() : null)
-                .userName(space.getUser() != null? space.getUser().getName() : null)
-                .build();
-    }
-
     @Override
     public SpaceResponseDTO createSpace(SpaceRequestDTO request) throws ResourceNotFoundException {
         User user = userRepository.findById(request.getUserId())
@@ -64,6 +47,8 @@ public class SpaceServiceImpl implements SpaceService {
 
         Category category = categoryRepository.findById(request.getCategoryId())
                .orElseThrow(() -> new ResourceNotFoundException("No se encontro la categoria"));
+
+        List<Feature> features = featureRepository.findAllById(request.getFeatureIds());
 
         Space space = Space.builder()
                 .name(request.getName())
@@ -78,6 +63,7 @@ public class SpaceServiceImpl implements SpaceService {
                 .capacity(request.getCapacity())
                 .user(user)
                 .category(category)
+                .features(new HashSet<>(features))
                 .build();
 
         Space saveSpace = spaceRepository.save(space);
@@ -97,6 +83,8 @@ public class SpaceServiceImpl implements SpaceService {
         Space existingSpace = spaceRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No se encontro la oficina con el id" + id));
 
+        List<Feature> features = featureRepository.findAllById(request.getFeatureIds());
+
         //Actualizo
         existingSpace.setName(request.getName());
         existingSpace.setDescription(request.getDescription());
@@ -108,6 +96,7 @@ public class SpaceServiceImpl implements SpaceService {
         existingSpace.setMainImage(request.getMainImage());
         existingSpace.setImageGallery(request.getImageGallery());
         existingSpace.setCapacity(request.getCapacity());
+        existingSpace.setFeatures(new HashSet<>(features));
 
         Space update = spaceRepository.save(existingSpace);
         return mapToDTO(update);
@@ -120,6 +109,40 @@ public class SpaceServiceImpl implements SpaceService {
         } else {
             throw new ResourceNotFoundException("No se encontro el turno con id: " + id);
         }
+    }
+
+    private SpaceResponseDTO mapToDTO(Space space){
+        return SpaceResponseDTO.builder()
+                .id(space.getId())
+                .name(space.getName())
+                .description(space.getDescription())
+                .address(space.getAddress())
+                .city(space.getCity())
+                .country(space.getCountry())
+                .pricePerDay(space.getPricePerDay())
+                .available(space.getAvailable())
+                .mainImage(space.getMainImage())
+                .imageGallery(space.getImageGallery())
+                .capacity(space.getCapacity())
+                .categoryName(space.getCategory() != null? space.getCategory().getName() : null)
+                .userName(space.getUser() != null? space.getUser().getName() : null)
+                .features(mapFeaturesToDTO(space.getFeatures()))
+                .build();
+    }
+
+    private List<FeatureResponseDTO> mapFeaturesToDTO(Set<Feature> features){
+        if (features == null){
+            return null;
+        }
+
+        return features.stream()
+                .map(feature -> FeatureResponseDTO.builder()
+                        .id(feature.getId())
+                        .name(feature.getName())
+                        .icon(feature.getIcon())
+                        .build())
+                .collect(Collectors.toList());
+
     }
 
 
