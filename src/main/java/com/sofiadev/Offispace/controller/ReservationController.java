@@ -1,9 +1,11 @@
 package com.sofiadev.Offispace.controller;
 
-import com.sofiadev.Offispace.dto.ReservationRequestDTO;
-import com.sofiadev.Offispace.dto.ReservationResponseDTO;
+import com.sofiadev.Offispace.dto.request.ReservationRequestDTO;
+import com.sofiadev.Offispace.dto.response.ReservationResponseDTO;
 import com.sofiadev.Offispace.exception.ResourceNotFoundException;
 import com.sofiadev.Offispace.service.ReservationService;
+import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,10 +23,11 @@ public class ReservationController {
 
     private final ReservationService reservationService;
 
+    @Operation(summary = "Realizo una reserva")
     @PostMapping
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<ReservationResponseDTO> createReservation(
-            @RequestBody ReservationRequestDTO request,
+            @RequestBody @Valid ReservationRequestDTO request,
             @AuthenticationPrincipal UserDetails userDetails) throws ResourceNotFoundException
     {
         String userEmail = userDetails.getUsername();
@@ -32,6 +35,7 @@ public class ReservationController {
         return ResponseEntity.status(HttpStatus.CREATED).body(reservation);
     }
 
+    @Operation(summary = "Obtengo mis reservas")
     @GetMapping
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<ReservationResponseDTO>> getUserReservations(
@@ -41,7 +45,7 @@ public class ReservationController {
         List<ReservationResponseDTO> reservations = reservationService.getUserReservation(userEmail);
         return ResponseEntity.ok(reservations);
     }
-
+    @Operation(summary = "Cancelo una reserva")
     @DeleteMapping("/{reservationId}")
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<String> cancelReservation(

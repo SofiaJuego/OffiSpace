@@ -1,7 +1,7 @@
 package com.sofiadev.Offispace.service;
 
-import com.sofiadev.Offispace.dto.ReservationRequestDTO;
-import com.sofiadev.Offispace.dto.ReservationResponseDTO;
+import com.sofiadev.Offispace.dto.request.ReservationRequestDTO;
+import com.sofiadev.Offispace.dto.response.ReservationResponseDTO;
 import com.sofiadev.Offispace.exception.ResourceNotFoundException;
 
 import java.util.List;

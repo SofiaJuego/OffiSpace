@@ -1,7 +1,7 @@
 package com.sofiadev.Offispace.service;
 
-import com.sofiadev.Offispace.dto.FeatureRequestDTO;
-import com.sofiadev.Offispace.dto.FeatureResponseDTO;
+import com.sofiadev.Offispace.dto.request.FeatureRequestDTO;
+import com.sofiadev.Offispace.dto.response.FeatureResponseDTO;
 import com.sofiadev.Offispace.exception.ResourceNotFoundException;
 
 import java.util.List;

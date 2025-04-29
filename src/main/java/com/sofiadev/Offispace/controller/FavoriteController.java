@@ -1,9 +1,10 @@
 package com.sofiadev.Offispace.controller;
 
-import com.sofiadev.Offispace.dto.FavoriteRequestDTO;
-import com.sofiadev.Offispace.dto.FavoriteResponseDTO;
+import com.sofiadev.Offispace.dto.request.FavoriteRequestDTO;
+import com.sofiadev.Offispace.dto.response.FavoriteResponseDTO;
 import com.sofiadev.Offispace.exception.ResourceNotFoundException;
 import com.sofiadev.Offispace.service.FavoriteService;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ public class FavoriteController {
 
     private final FavoriteService favoriteService;
 
-
+    @Operation(summary = "Agregar un espacio como favorito")
     @PostMapping
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<FavoriteResponseDTO> addFavorite(
@@ -32,6 +33,7 @@ public class FavoriteController {
        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
+    @Operation(summary = "Elimino un espacio como favorito")
     @DeleteMapping("/{spaceId}")
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<String> removeFavorite(
@@ -42,6 +44,7 @@ public class FavoriteController {
         return ResponseEntity.ok("Se elimino el espacio de favoritos");
     }
 
+    @Operation(summary = "Obtengo mis favoritos")
     @GetMapping
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<FavoriteResponseDTO>> getUserFavorites(

@@ -1,9 +1,8 @@
 package com.sofiadev.Offispace.service;
 
-import com.sofiadev.Offispace.dto.SpaceRequestDTO;
-import com.sofiadev.Offispace.dto.SpaceResponseDTO;
+import com.sofiadev.Offispace.dto.request.SpaceRequestDTO;
+import com.sofiadev.Offispace.dto.response.SpaceResponseDTO;
 import com.sofiadev.Offispace.exception.ResourceNotFoundException;
-import com.sofiadev.Offispace.model.Space;
 
 import java.util.List;
 

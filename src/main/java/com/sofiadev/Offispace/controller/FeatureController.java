@@ -1,10 +1,11 @@
 package com.sofiadev.Offispace.controller;
 
-import com.sofiadev.Offispace.dto.FavoriteResponseDTO;
-import com.sofiadev.Offispace.dto.FeatureRequestDTO;
-import com.sofiadev.Offispace.dto.FeatureResponseDTO;
+import com.sofiadev.Offispace.dto.request.FeatureRequestDTO;
+import com.sofiadev.Offispace.dto.response.FeatureResponseDTO;
 import com.sofiadev.Offispace.exception.ResourceNotFoundException;
 import com.sofiadev.Offispace.service.FeatureService;
+import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,24 +21,27 @@ public class FeatureController {
 
     private final FeatureService featureService;
 
+    @Operation(summary = "Creo una característica")
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<FeatureResponseDTO> createFeature(
-            @RequestBody FeatureRequestDTO request)
+            @RequestBody @Valid FeatureRequestDTO request)
     {
         FeatureResponseDTO create = featureService.createFeature(request);
         return new ResponseEntity<>(create, HttpStatus.CREATED);
     }
 
+    @Operation(summary = "Actualizo una característica existente")
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<FeatureResponseDTO> updateFeature(
             @PathVariable Long id,
-            @RequestBody FeatureRequestDTO request) throws ResourceNotFoundException {
+            @RequestBody @Valid
+            FeatureRequestDTO request) throws ResourceNotFoundException {
       FeatureResponseDTO update = featureService.updateFeature(id, request);
       return ResponseEntity.ok(update);
     }
-
+    @Operation(summary = "Elimino característica por ID")
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> deleteFeature(@PathVariable Long id) throws ResourceNotFoundException {
@@ -45,9 +49,8 @@ public class FeatureController {
         return ResponseEntity.ok("Se elimino la característica con exito");
     }
 
-
+    @Operation(summary = "Obtengo todas las característica")
     @GetMapping
-    @PreAuthorize("permitAll()")
     public ResponseEntity<List<FeatureResponseDTO>> getAllFeatures(){
         List<FeatureResponseDTO> features = featureService.getAllFeatures();
         return ResponseEntity.ok(features);

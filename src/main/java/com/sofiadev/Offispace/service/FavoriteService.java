@@ -1,10 +1,8 @@
 package com.sofiadev.Offispace.service;
 
-import com.sofiadev.Offispace.dto.FavoriteRequestDTO;
-import com.sofiadev.Offispace.dto.FavoriteResponseDTO;
+import com.sofiadev.Offispace.dto.request.FavoriteRequestDTO;
+import com.sofiadev.Offispace.dto.response.FavoriteResponseDTO;
 import com.sofiadev.Offispace.exception.ResourceNotFoundException;
-import com.sofiadev.Offispace.model.Favorite;
-import com.sofiadev.Offispace.model.User;
 
 import java.util.List;
 

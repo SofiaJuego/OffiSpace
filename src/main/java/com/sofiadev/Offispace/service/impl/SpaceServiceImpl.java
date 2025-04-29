@@ -1,8 +1,8 @@
 package com.sofiadev.Offispace.service.impl;
 
-import com.sofiadev.Offispace.dto.FeatureResponseDTO;
-import com.sofiadev.Offispace.dto.SpaceRequestDTO;
-import com.sofiadev.Offispace.dto.SpaceResponseDTO;
+import com.sofiadev.Offispace.dto.response.FeatureResponseDTO;
+import com.sofiadev.Offispace.dto.request.SpaceRequestDTO;
+import com.sofiadev.Offispace.dto.response.SpaceResponseDTO;
 import com.sofiadev.Offispace.model.Category;
 import com.sofiadev.Offispace.model.Feature;
 import com.sofiadev.Offispace.model.Space;
@@ -107,7 +107,7 @@ public class SpaceServiceImpl implements SpaceService {
         if(spaceRepository.existsById(id)){
             spaceRepository.deleteById(id);
         } else {
-            throw new ResourceNotFoundException("No se encontro el turno con id: " + id);
+            throw new ResourceNotFoundException("No se encontro el espacio con id: " + id);
         }
     }
 

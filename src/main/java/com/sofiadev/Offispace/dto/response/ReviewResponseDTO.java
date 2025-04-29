@@ -1,4 +1,4 @@
-package com.sofiadev.Offispace.dto;
+package com.sofiadev.Offispace.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -4,6 +4,7 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import io.jsonwebtoken.Jwts;
 
@@ -28,10 +29,10 @@ public class JwtService {
    }
 
    //creamos token
-    public String generateToken(String username){
+    public String generateToken(UserDetails userDetails){
         return Jwts
                 .builder()
-                .subject(username)
+                .subject(userDetails.getUsername())
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis() + jwtExpiration))
                 .signWith(key, Jwts.SIG.HS256)
@@ -39,13 +40,19 @@ public class JwtService {
     }
 
     //Validamos si el token es correcto
-    public boolean isTokenValid(String token){
+    public boolean isTokenValid(String token, String email){
         try {
-            Jwts.parser()
+            var claims = Jwts
+                    .parser()
                     .verifyWith(key)
                     .build()
-                    .parseSignedClaims(token);
-            return true;
+                    .parseSignedClaims(token)
+                    .getPayload();
+
+            String extractedEmail = claims.getSubject();
+            Date expiration = claims.getExpiration();
+
+            return (extractedEmail.equals(email) && !expiration.before(new Date()));
         } catch (Exception e) {
             return false;
         }

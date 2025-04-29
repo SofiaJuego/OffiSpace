@@ -1,4 +1,4 @@
-package com.sofiadev.Offispace.dto;
+package com.sofiadev.Offispace.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class FeatureRequestDTO {
-    private String name;
-    private String icon;
+public class FavoriteRequestDTO {
+    private Long spaceId;
 }

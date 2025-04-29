@@ -1,7 +1,7 @@
 package com.sofiadev.Offispace.service.impl;
 
-import com.sofiadev.Offispace.dto.ReservationRequestDTO;
-import com.sofiadev.Offispace.dto.ReservationResponseDTO;
+import com.sofiadev.Offispace.dto.request.ReservationRequestDTO;
+import com.sofiadev.Offispace.dto.response.ReservationResponseDTO;
 import com.sofiadev.Offispace.exception.AccessDeniedException;
 import com.sofiadev.Offispace.exception.ResourceNotFoundException;
 import com.sofiadev.Offispace.model.Reservation;
@@ -42,7 +42,6 @@ public class ReservationServiceImpl implements ReservationService {
         Reservation save = reservationRepository.save(reservation);
         return mapToDTO(save);
     }
-
 
     @Override
     public List<ReservationResponseDTO> getUserReservation(String userEmail) throws ResourceNotFoundException {

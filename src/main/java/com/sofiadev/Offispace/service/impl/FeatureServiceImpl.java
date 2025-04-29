@@ -1,7 +1,7 @@
 package com.sofiadev.Offispace.service.impl;
 
-import com.sofiadev.Offispace.dto.FeatureRequestDTO;
-import com.sofiadev.Offispace.dto.FeatureResponseDTO;
+import com.sofiadev.Offispace.dto.request.FeatureRequestDTO;
+import com.sofiadev.Offispace.dto.response.FeatureResponseDTO;
 import com.sofiadev.Offispace.exception.ResourceAlreadyExistsException;
 import com.sofiadev.Offispace.exception.ResourceNotFoundException;
 import com.sofiadev.Offispace.model.Feature;
@@ -34,7 +34,6 @@ public class FeatureServiceImpl implements FeatureService {
         return mapToDTO(saveFeature);
 
     }
-
 
     @Override
     public FeatureResponseDTO updateFeature(Long id, FeatureRequestDTO request) throws ResourceNotFoundException {

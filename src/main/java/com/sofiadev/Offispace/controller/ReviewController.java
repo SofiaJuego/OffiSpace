@@ -1,9 +1,13 @@
 package com.sofiadev.Offispace.controller;
 
-import com.sofiadev.Offispace.dto.ReviewRequestDTO;
-import com.sofiadev.Offispace.dto.ReviewResponseDTO;
+import com.sofiadev.Offispace.dto.request.ReviewRequestDTO;
+import com.sofiadev.Offispace.dto.response.ReviewResponseDTO;
 import com.sofiadev.Offispace.exception.ResourceNotFoundException;
 import com.sofiadev.Offispace.service.ReviewService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,38 +24,49 @@ public class ReviewController {
 
     private final ReviewService reviewService;
 
+    @Operation(summary = "Obtengo la lista de reseñas que realice")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Reseña encontrada con exito"),
+            @ApiResponse(responseCode = "404", description = "Reseña no encontrada")})
     @GetMapping
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<List<ReviewResponseDTO>> getAllReviews(){
         return ResponseEntity.ok(reviewService.getAllReviews());
     }
 
+    @Operation(summary = "Obtengo la reseña que deje en un espacio")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Reseña encontrada con exito"),
+            @ApiResponse(responseCode = "404", description = "Reseña no encontrada")})
     @GetMapping("/space/{spaceId}")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<List<ReviewResponseDTO>> getReviewsBySpace(@PathVariable Long spaceId){
         return ResponseEntity.ok(reviewService.getReviewBySpaceById(spaceId));
     }
 
+    @Operation(summary = "Creo una reseña")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Se creo la reseña con exito"),
+            @ApiResponse(responseCode = "400", description = "Datos de entrada invalidos")})
     @PostMapping
     @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<ReviewResponseDTO> createReview(@RequestBody ReviewRequestDTO reviewRequestDTO) throws ResourceNotFoundException {
+    public ResponseEntity<ReviewResponseDTO> createReview(@RequestBody @Valid ReviewRequestDTO reviewRequestDTO) throws ResourceNotFoundException {
         ReviewResponseDTO createReview = reviewService.createReview(reviewRequestDTO);
         return new ResponseEntity<>(createReview, HttpStatus.CREATED);
     }
-
+    @Operation(summary = "Actualizo una reseña")
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<ReviewResponseDTO> updateReview(
             @PathVariable Long id,
-            @RequestBody ReviewRequestDTO reviewRequestDTO,
+            @RequestBody @Valid ReviewRequestDTO reviewRequestDTO,
             Authentication authentication) throws ResourceNotFoundException
     {
         String userEmail = authentication.getName();
         ReviewResponseDTO updateReview = reviewService.updateReview(id, reviewRequestDTO, userEmail);
         return ResponseEntity.ok(updateReview);
-
     }
-
+    @Operation(summary = "Elimino una reseña")
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<String> deleteReview(@PathVariable Long id, Authentication authentication) throws ResourceNotFoundException {
@@ -59,12 +74,5 @@ public class ReviewController {
         reviewService.deleteReview(id, userEmail);
         return ResponseEntity.ok("Se elimino la reseña");
     }
-
-
-
-
-
-
-
 
 }
