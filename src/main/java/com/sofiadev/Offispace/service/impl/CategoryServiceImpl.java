@@ -28,15 +28,17 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public Category getCategoryById(Long id) throws ResourceNotFoundException {
         return categoryRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Categoria no encontrada con id" + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Categoria no encontrada con id " + id));
     }
 
     @Override
     public Category updateCategory(Long id, Category categoryDetails) throws ResourceNotFoundException {
         Category category = categoryRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("No se pudo actualizar la categoria con el id" + id));
+                .orElseThrow(() -> new ResourceNotFoundException("No se pudo actualizar la categoria con el id " + id));
 
         category.setName(categoryDetails.getName());
+        category.setDescription(categoryDetails.getDescription());
+        category.setImage(categoryDetails.getImage());
         return categoryRepository.save(category);
     }
 
@@ -45,7 +47,7 @@ public class CategoryServiceImpl implements CategoryService {
         if (categoryRepository.existsById(id)){
             categoryRepository.deleteById(id);
         } else{
-            throw new ResourceNotFoundException("No se pudo eliminar la categoria con el id" + id);
+            throw new ResourceNotFoundException("No se pudo eliminar la categoria con el id " + id);
         }
 
     }

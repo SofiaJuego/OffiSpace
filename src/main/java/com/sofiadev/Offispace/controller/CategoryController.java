@@ -5,6 +5,7 @@ import com.sofiadev.Offispace.model.Category;
 import com.sofiadev.Offispace.service.CategoryService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +22,8 @@ public class CategoryController {
     @Operation(summary = "Creo una categoria")
     @PostMapping
     public ResponseEntity<Category> createCategory(@RequestBody Category category){
-        return ResponseEntity.ok(categoryService.createCategory(category));
+        Category createCategory = categoryService.createCategory(category);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createCategory);
     }
 
     @Operation(summary = "Obtengo todas las categorias")
