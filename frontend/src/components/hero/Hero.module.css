@@ -1,0 +1,102 @@
+.hero{
+    position: relative;
+    height: 80vh;
+    background-image: url('../../assets/hero-img.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(19, 58, 79, 0.76);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+    padding: 2rem;
+}
+
+.title{
+    font-size: 2.6rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-family: 'PT Serif',  sans-serif;
+}
+
+.searchBar{
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.8) ;
+    padding: 1rem;
+    border-radius: 5px;
+    width: 80%;
+    max-width: 900px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+
+.inputDate, .inputText {
+    flex: 1;
+    min-width: 300px;
+    max-width: 400px;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    background-color: white;
+    box-sizing: border-box;
+}
+
+.separator{
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.searchBtn{
+    background-color:  #fa5d3e;
+    border: none;
+    color:white;
+    padding: 0.75rem 2rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.searchBtn:hover{
+    background-color: #e85f40;
+}
+
+.dateInputWrapper{
+    position: relative;
+    flex: 1;
+    display: flex;
+    min-width: 300px;
+    max-width: 400px;
+    border-radius: 6px;
+}
+
+.calendarWrapper{
+  position: absolute;
+  width: 320px;
+  top: 50px; 
+  left: 0;
+  z-index: 100;
+  background-color:  wi;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  font-family: 'Inter' sans-serif;
+  padding: 10px;
+  max-width: 100%;
+  min-width: 300px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+
+

@@ -1,0 +1,11 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Inter', 'PT Serif' , sans-serif;
+    background-color:#ffff;
+    color: #3333;
+}

@@ -44,3 +44,8 @@ Thumbs.db
 
 ### Compilados ###
 *.class
+
+# Entornos de Spring
+application.yml
+application-*.yml
+application-*.properties
