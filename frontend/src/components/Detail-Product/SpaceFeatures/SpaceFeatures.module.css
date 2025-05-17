@@ -1,0 +1,44 @@
+.featuresContainer{
+    width: 80%;
+    margin-top: 32px;
+    padding: 25px;
+    
+}
+
+.sectionTitle{
+    color: black;
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 40px;
+}
+
+.featuresList{
+    list-style: none;
+    flex-wrap: wrap;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+}
+
+.featuresList li{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    background-color: #f0f0f0;
+    border-radius: 20px;
+    font-size: 14px;
+    color: #636465;
+    white-space: nowrap;
+    transition: background-color 0.2s;
+}
+
+.featureChip:hover {
+  background-color: #e4e4e4;
+}
+
+.icon{
+    color: #fa5d3e;
+    font-size: 18px;
+}
+

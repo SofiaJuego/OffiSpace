@@ -2,7 +2,7 @@ import React from "react";
 import styles from "../Gallery/ImageGallery.module.css"
 
 function ImageGallery(){
-    const mainImage = "public/web/oficina-privada.jpg"
+    const mainImage = "./web/oficina-privada.jpg"
 
     const sideImages = [
         "./web/oficina-privada.jpg",
