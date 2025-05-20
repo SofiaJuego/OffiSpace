@@ -1,0 +1,78 @@
+.calendarContainer{
+    padding: 3rem 5rem 3rem 4rem;
+    margin-top: 32px ;
+    background-color: #fff;
+    border-radius: 12px;
+    width: 100%;
+    box-sizing: border-box;
+}
+.title{
+    color: black;
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 24px;
+}
+
+
+:global(.reservedDay){
+  background-color: #ffc9c9;
+  color: #a10000;
+  text-decoration: line-through;
+  pointer-events: none;
+  font-size: 1.2rem;
+  transform: scale(0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+:global(.rdp-weekdays){
+    font-size:1.4rem ;
+}
+
+
+:global(.rdp-root){
+    color: black;
+    font-family: 'Inter', sans-serif;
+    font-size: 1.1rem;
+    --rdp-accent-color: #fa5d3e;
+    --rdp-background-color: #fff;
+    --rdp-cell-size: 40px;
+    --rdp-spacing: 8px;
+    --rdp-border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+}
+
+/* Contenedor del mes */
+:global(.rdp-months) {
+  --rdp-months-gap:8rem;
+  padding: 15px 0 15px 0;
+  
+}
+
+:global(.rdp-month_grid){
+    --rdp-day-height:50px;
+    --rdp-day-width:50px;
+}
+
+@media(max-width: 768px){
+    :global(.rdp-root){
+       padding: 15px;
+    
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+ 

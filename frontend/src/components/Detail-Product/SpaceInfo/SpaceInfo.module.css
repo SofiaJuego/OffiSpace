@@ -1,6 +1,5 @@
 .infoContainer{
     justify-content: left;
-    padding: 24px;
     margin: 10px auto;
 }
 
@@ -32,11 +31,12 @@
 .location,
 .reviews{
     font-size: 15px;
-    color: #636465;
+    color: #4d4e4e;
 }
 
 .description{
     font-size: 16px;
     line-height: 1.6;
     color: black;
+    overflow: hidden;
 }

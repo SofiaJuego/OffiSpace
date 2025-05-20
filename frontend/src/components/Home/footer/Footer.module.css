@@ -1,0 +1,23 @@
+.footer{
+    width: 100%;
+    background-color: #ffffff;
+    padding: 1.5rem 2rem;
+    border-top: 1px solid #d3cbcb;
+}
+
+.footerContent{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.logo{
+    height: 110px;
+    object-fit: contain;
+}
+
+.text{
+    font-size: 0.80rem;
+    color: #444;
+}

@@ -11,7 +11,7 @@ function SpaceInfo(){
 
             <div className={styles.detailsRow}>
                 <div className={styles.rating}>
-                    <FontAwesomeIcon icon={faStar} style={{ color: "#FFC107", marginRight: "5px" }} />
+                    <FontAwesomeIcon icon={faStar} style={{ color: "#636465", marginRight: "1px"}} />
                     <span className={styles.score}>4.5 </span>
                 </div>
                 <span className={styles.line}>|</span>
@@ -21,6 +21,20 @@ function SpaceInfo(){
             </div>
 
             <p className={styles.description}>Somos el espacio de coworking que querrás que tus clientes visiten. Donde tu marca crecerá. 
+                Si te encantan los detalles como a nosotros, este es tu lugar.
+                Somos el espacio de coworking que querrás que tus clientes visiten. Donde tu marca crecerá. 
+                Si te encantan los detalles como a nosotros, este es tu lugar.
+                Somos el espacio de coworking que querrás que tus clientes visiten. Donde tu marca crecerá. 
+                Si te encantan los detalles como a nosotros, este es tu lugar.
+                Somos el espacio de coworking que querrás que tus clientes visiten. Donde tu marca crecerá. 
+                Si te encantan los detalles como a nosotros, este es tu lugar.
+                Somos el espacio de coworking que querrás que tus clientes visiten. Donde tu marca crecerá. 
+                Si te encantan los detalles como a nosotros, este es tu lugar.
+                Somos el espacio de coworking que querrás que tus clientes visiten. Donde tu marca crecerá. 
+                Si te encantan los detalles como a nosotros, este es tu lugar.
+                Somos el espacio de coworking que querrás que tus clientes visiten. Donde tu marca crecerá. 
+                Si te encantan los detalles como a nosotros, este es tu lugar.
+                Somos el espacio de coworking que querrás que tus clientes visiten. Donde tu marca crecerá. 
                 Si te encantan los detalles como a nosotros, este es tu lugar.
             </p>
         </section>

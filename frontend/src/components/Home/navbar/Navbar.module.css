@@ -1,0 +1,144 @@
+.navbar{
+    width: 100%;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    position: relative;
+}
+
+.left{
+    display: flex;
+    align-items: center;
+    
+    
+}
+
+.logo{
+    height: 55px;
+    object-fit: contain;
+}
+
+.lema{
+    font-size: 1.0rem;
+    color: #000;
+     font-family: 'PT Serif',  sans-serif;
+}
+
+.right{
+    display: flex;
+    gap: 1rem;
+}
+
+.outlineBtn{
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    background: transparent;
+    border: 2px solid #FA5D3E;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 150px;
+    height: 35px;
+}
+
+.outlineBtn:hover{
+    background-color: hsla(10, 95%, 61%, 0.153);
+    
+}
+
+.hamburger{
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: none;
+    font-size: 1.2rem;
+    z-index: 20;
+}
+
+.mobileMenu{
+    display: none;
+}
+
+
+/* --------- Responsive --------- */
+
+@media (max-width: 768px){
+    .hamburger{
+        display: block;
+    }
+
+    .right{
+      display: none;
+    
+    }
+
+
+    .mobileMenu{
+        gap: 2rem;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        display: flex;     
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: #ffffff;
+        z-index: 10;
+        animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .openMenu{
+        display: flex !important;
+    }
+
+     .outlineBtn{
+    width: 200px;
+    height: 50px;
+}
+
+    .closeBtn{
+        position: absolute;
+        top: 1.9rem;
+        right: 1.4rem;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+
+    @keyframes fadeIn {
+        from{
+            opacity: 0;
+            transform: scale(0.95);
+        }
+        
+        to{
+            opacity: 1;
+            transform: scale(1);
+        }
+
+    }
+
+    .fadeOut{
+        animation: fadeOut 0.3s ease-in-out forwards;
+    }
+
+    @keyframes fadeOut {
+        from{
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        to{
+            opacity: 0;
+            transform: scale(0.9);
+        }
+        
+    }
+
+   
+}

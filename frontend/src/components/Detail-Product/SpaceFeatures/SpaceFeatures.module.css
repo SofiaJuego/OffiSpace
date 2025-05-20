@@ -1,7 +1,6 @@
 .featuresContainer{
-    width: 80%;
-    margin-top: 32px;
-    padding: 25px;
+    width: 70%;
+    padding: 4rem 5rem 0 4rem;
     
 }
 
@@ -10,6 +9,7 @@
     font-size: 25px;
     font-weight: bold;
     margin-bottom: 40px;
+    
 }
 
 .featuresList{

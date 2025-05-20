@@ -1,7 +1,7 @@
 .galleryContainer{
     display: flex;
     gap: 1rem;
-    padding: 2rem;
+    margin: 2rem 5rem 2rem ;
     justify-content: center;
     align-items: flex-start;
     position: relative;
@@ -17,7 +17,7 @@
 
 
 .mainImage{
-    width: 100%;
+    width: 101%;
     height: 100%;
     border-radius: 10px;
     object-fit: cover;
@@ -30,7 +30,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-    gap: 0.5rem;
+    gap: 0.8rem;
 }
 
 .sideImage{
@@ -52,8 +52,8 @@
 
 .viewMoreBtn{
     position: absolute;
-    bottom: -0.5rem;
-    right: 2rem;
+    bottom: -3rem;
+    right: 0.1rem;
     background-color: #fff;
     color: #fa5d3e;
     border: 1px solid #fa5d3e;
