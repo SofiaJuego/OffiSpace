@@ -1,8 +1,7 @@
 import React from "react";
 import styles from "../recommendations/Recommendations.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart as solidHeart, faStar } from "@fortawesome/free-solid-svg-icons";
-import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
+
+import Card from "../../Cards/Card";
 
 
 const mockProducts = [
@@ -63,34 +62,11 @@ function Recommendations(){
         <section className={styles.sectionContainer}>
             <h2 className={styles.sectionTitle}>Espacios que te pueden interesar </h2>
             <div className={styles.gridContainer}>
+              {selected.map((product, index) => (
+                <Card key={index} product={product}/>
+              ))}
 
-              {selected.map((product,index) => (
-                <div className={styles.card} key={index}>
-                    <img src={product.image} alt={product.title}/>
-                    <div className={styles.cardContent}>
-                      <div className={styles.titleRow}>
-                        <h3>{product.title}</h3>
-                        <FontAwesomeIcon icon={regularHeart} className={styles.heartIcon}/>
-                      </div>
-                      
-                      <span className={styles.category}>{product.category}</span>
-                      <p>{product.description}</p>
-                      
-                      <div className={styles.rating}>
-                        <FontAwesomeIcon icon={faStar} className={styles.starIcon}/>
-                        {product.rating}
-                      </div>
 
-                      <div className={styles.buttonRow}>
-                        <div className={styles.price}>${product.price}/dia</div>
-                        <button>Ver más</button>
-                      </div>
-                     
-                     
-                    </div>
-                    
-                </div>
-                ))}
             </div>
         </section>
     );

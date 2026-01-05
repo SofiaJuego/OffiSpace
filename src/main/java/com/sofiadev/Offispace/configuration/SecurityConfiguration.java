@@ -35,6 +35,11 @@ public class SecurityConfiguration {
     @Autowired
     private CustomAccessDeniedHandler customAccessDeniedHandler;
 
+    public SecurityConfiguration(JwtAuthenticationFilter jwtAuthenticationFilter, UserDetailsService userDetailsService) {
+        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
+        this.userDetailsService = userDetailsService;
+    }
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http

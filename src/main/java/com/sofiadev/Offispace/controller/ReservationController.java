@@ -21,7 +21,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ReservationController {
 
-    private final ReservationService reservationService;
+    private ReservationService reservationService;
 
     @Operation(summary = "Realizo una reserva")
     @PostMapping

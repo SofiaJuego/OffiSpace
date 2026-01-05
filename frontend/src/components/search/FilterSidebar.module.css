@@ -1,0 +1,73 @@
+.sidebar{
+    width: 280px;
+    padding: 16px;
+    color: black;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.section{
+    margin-top: 20px;
+    margin-bottom: 30px;
+    padding: 10px 0 10px 0;
+}
+
+.budgetInputs input{
+    margin-top: 20px;
+    width: 100%;
+    padding: 10px;
+    
+}
+
+
+.options{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    gap: 5px;
+}
+
+.optionBtn{
+    background-color: #f2f2f2;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.optionBtn.active{
+    background-color: #133A4F;
+    color: white;
+}
+
+.checkboxGroup{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    gap: 6px;
+}
+
+.checkboxLabel{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.capacityControl{
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.capacityControl button{
+padding: 4px 10px;
+  font-size: 1.1rem;
+  background: #133A4F;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+
+}

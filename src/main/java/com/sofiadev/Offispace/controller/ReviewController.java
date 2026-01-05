@@ -24,6 +24,10 @@ public class ReviewController {
 
     private final ReviewService reviewService;
 
+    public ReviewController(ReviewService reviewService) {
+        this.reviewService = reviewService;
+    }
+
     @Operation(summary = "Obtengo la lista de reseñas que realice")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Reseña encontrada con exito"),

@@ -1,0 +1,111 @@
+.resultSection{
+    padding: 1rem 2rem;
+    background-color: #fff;
+}
+
+.header{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+    margin-bottom: 10px;
+    color: black;
+
+    
+}
+
+.appliedFilters{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.filterTag{
+    margin-top: 10px;
+    background-color:#e2e2e2;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    color:black;
+}
+
+.removeBtn{
+    background: transparent;
+    border: none;
+    margin-left: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #535b5f;
+}
+
+.clearFilters{
+    background: transparent;
+    color: #f06a50;
+    border: none;
+    margin-left: auto;
+    cursor: pointer;
+}
+
+.sortButtons{
+    display: flex;
+    font-size: 0.8rem;
+    gap: 3px;
+    margin-left: auto;
+    
+    
+}
+
+.containerCard{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 16px;
+
+}
+
+
+.sortButtons button{
+    padding: 6px 12px;
+    border-radius: 2px;
+    background: none;
+    border: 1px solid #fa5d3e80;
+    cursor: pointer;
+}
+
+.sortButtons button:hover{
+    background-color: #fa5d3e5b;
+    
+}
+
+.sortButtons p{
+    margin-right: 5px;
+    margin-top: 7px;
+}
+
+p{
+    color: black;
+}
+
+.pagination{
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 24px;
+}
+
+.pagination button{
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    background: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.pagination .active{
+    background-color: #133A4F;
+    color: white;
+    font-weight: bold;
+}

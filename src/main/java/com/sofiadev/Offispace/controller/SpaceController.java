@@ -23,6 +23,10 @@ public class SpaceController {
 
     private final SpaceService spaceService;
 
+    public SpaceController(SpaceService spaceService) {
+        this.spaceService = spaceService;
+    }
+
     @Operation(summary = "Obtener todos los espacios")
     @GetMapping
     public ResponseEntity<List<SpaceResponseDTO>> getAllSpace(){

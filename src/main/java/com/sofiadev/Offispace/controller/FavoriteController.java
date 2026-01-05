@@ -22,6 +22,10 @@ public class FavoriteController {
 
     private final FavoriteService favoriteService;
 
+    public FavoriteController(FavoriteService favoriteService) {
+        this.favoriteService = favoriteService;
+    }
+
     @Operation(summary = "Agregar un espacio como favorito")
     @PostMapping
     @PreAuthorize("hasRole('USER')")

@@ -17,7 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CategoryController {
 
-    private final CategoryService categoryService;
+    private CategoryService categoryService;
 
     @Operation(summary = "Creo una categoria")
     @PostMapping
